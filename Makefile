@@ -12,7 +12,9 @@ docs:
 	cd docs && hugo
 
 .PHONY: test
+test: export ATHENS_MONGO_STORAGE_URL=$(docker-compose -p athensdev port mongo 27017)
 test:
+	cd pkg && go test ./...
 	cd cmd/proxy && buffalo test
 	cd cmd/olympus && buffalo test
 
